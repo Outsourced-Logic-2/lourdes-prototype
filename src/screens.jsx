@@ -159,7 +159,7 @@ const QueueTile = ({ icon, label, count, tone, onClick }) => {
 
 };
 
-const Home = ({ history, onPickMode, onOpenHistory, onOpenHistoryFiltered, onOpenItem, usage }) => {
+const Home = ({ history, onPickMode, onOpenHistory, onOpenHistoryFiltered, onOpenItem }) => {
   const urgentItems = history.filter((h) => h.status === 'urgent' || h.status === 'filed' || h.status === 'pending').slice(0, 4);
   const activeQueue = history.filter((h) => h.status === 'filed' || h.status === 'pending' || h.status === 'urgent').slice(0, 6);
   const completed = history.filter((h) => h.status === 'approved' || h.status === 'overturned' || h.status === 'denied').slice(0, 6);
@@ -510,7 +510,7 @@ const Dashboard = ({ onPickMode }) => {
           { dx: '52yo F, cellulitis abscess — IV vanc', insurer: 'Humana', filed: 'May 15', days: '1 day', claim: 'CLM-47931' }].
           map((p, i) =>
           <div key={i} className="row-hover" style={{
-            display: 'grid', gridTemplateColumns: '110px 1fr 140px 110px 28px', gap: 12,
+            display: 'grid', gridTemplateColumns: '110px 1fr auto 110px 28px', gap: 12,
             padding: '12px 18px', borderBottom: i < 5 ? `1px solid ${T.line2}` : 'none',
             fontSize: 12.5, alignItems: 'center', cursor: 'pointer'
           }}>

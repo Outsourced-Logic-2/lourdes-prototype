@@ -322,7 +322,8 @@ function App() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: T.bg }}>
       <Sidebar
-        active={screen === 'history' ? 'history' : screen === 'dashboard' ? 'dashboard' : 'home'}
+        active={screen === 'history' ? 'history' : screen === 'dashboard' ? 'dashboard' : (screen === 'input' || screen === 'generating' || screen === 'output') ? 'generate' : 'home'}
+        activeMode={(screen === 'input' || screen === 'generating' || screen === 'output') ? mode : null}
         activeFilter={historyStatusFilter}
         onNav={nav}
         onNavFiltered={(status) => { setHistoryStatusFilter(status); setScreen('history'); }}
@@ -330,13 +331,11 @@ function App() {
         deadlineCount={history.filter(h => h.status === 'urgent').length}
         pendingCount={history.filter(h => h.status === 'filed' || h.status === 'pending').length}
         draftCount={history.filter(h => h.status === 'draft').length}
-        usage={usage}
       />
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: '100vh', minWidth: 0 }}>
         {screen === 'home' && (
           <Home
             history={history}
-            usage={usage}
             onPickMode={startNewCase}
             onOpenHistory={() => { setHistoryStatusFilter('all'); setScreen('history'); }}
             onOpenHistoryFiltered={(status) => { setHistoryStatusFilter(status); setScreen('history'); }}

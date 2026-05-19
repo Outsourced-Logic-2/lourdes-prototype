@@ -241,7 +241,7 @@ const NavItem = ({ icon, label, active, count, onClick, hint }) => (
   </div>
 );
 
-const Sidebar = ({ active, activeFilter, onNav, onNavFiltered, onNewCase, deadlineCount, pendingCount, draftCount, usage }) => (
+const Sidebar = ({ active, activeMode, activeFilter, onNav, onNavFiltered, onNewCase, deadlineCount, pendingCount, draftCount }) => (
   <div style={{
     width: 240, flex: '0 0 240px',
     background: T.navy,
@@ -300,9 +300,9 @@ const Sidebar = ({ active, activeFilter, onNav, onNavFiltered, onNewCase, deadli
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
         <div style={{ padding: '0 12px', fontSize: 10.5, color: T.navyMut, fontWeight: 600, letterSpacing: 0.6, textTransform: 'uppercase' }}>Quick generate</div>
-        <NavItem icon="letter" label="Appeal letter"  onClick={() => onNewCase('appeal')}/>
-        <NavItem icon="note"   label="Clinical note"  onClick={() => onNewCase('note')}/>
-        <NavItem icon="phone"  label="P2P prep"       onClick={() => onNewCase('p2p')}/>
+        <NavItem icon="letter" label="Appeal letter"  active={activeMode === 'appeal'} onClick={() => onNewCase('appeal')}/>
+        <NavItem icon="note"   label="Clinical note"  active={activeMode === 'note'}   onClick={() => onNewCase('note')}/>
+        <NavItem icon="phone"  label="P2P prep"       active={activeMode === 'p2p'}    onClick={() => onNewCase('p2p')}/>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -313,16 +313,8 @@ const Sidebar = ({ active, activeFilter, onNav, onNavFiltered, onNewCase, deadli
       </div>
     </div>
 
-    {/* Usage + user */}
+    {/* User */}
     <div style={{ borderTop: `1px solid ${T.navyBor}`, padding: '12px 16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6, fontSize: 11, color: T.navyMut, fontFamily: T.mono }}>
-        <span>USAGE</span>
-        <span>{usage} / 100</span>
-      </div>
-      <div style={{ height: 4, background: 'rgba(255,255,255,0.08)', borderRadius: 2, overflow: 'hidden', marginBottom: 14 }}>
-        <div style={{ height: '100%', width: `${Math.min(100, usage)}%`, background: 'linear-gradient(90deg, #3a8ce0, #5fa3e8)', borderRadius: 2 }}/>
-      </div>
-
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <div style={{
           width: 32, height: 32, borderRadius: '50%',
