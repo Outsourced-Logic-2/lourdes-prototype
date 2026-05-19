@@ -1,0 +1,5 @@
+node_modules
+dist
+design-extract
+.DS_Store
+*.local
